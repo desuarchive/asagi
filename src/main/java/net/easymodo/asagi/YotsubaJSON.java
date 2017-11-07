@@ -49,7 +49,7 @@ public class YotsubaJSON extends YotsubaAbstract {
     }
 
     private String linkThreads() {
-        return this.boardLinks.get("link") + "/" + "threads.json";
+        return this.boardLinks.get("link") + "/" + "archive.json";
     }
 
     @Override
@@ -130,24 +130,18 @@ public class YotsubaJSON extends YotsubaAbstract {
         Page threadList = new Page(-1);
         threadList.setLastMod(newLastMod);
 
-        TopicListJson.Page[] topicsJson;
+        int[] topicsJson;
         try {
-            topicsJson = GSON.fromJson(threadsText, TopicListJson.Page[].class);
+            topicsJson = GSON.fromJson(threadsText, int[].class);
         } catch(JsonSyntaxException ex) {
             throw new ContentGetException("API returned invalid JSON", ex);
         }
 
-        if(topicsJson == null) {
-            throw new ContentParseException("API returned empty JSON in threads.json");
-        }
-
-        for(TopicListJson.Page page : topicsJson) {
-            for(TopicListJson.Topic topic : page.getThreads()) {
-                Topic t = new Topic(topic.getNo(), 0, 0);
-                t.setLastModTimestamp(topic.getLastModified());
-                t.setLastPage(page.getPage());
-                threadList.addThread(t);
-            }
+        for(int threadnum : topicsJson) {
+            Topic t = new Topic(threadnum, 0, 0);
+            t.setLastModTimestamp(0);
+            t.setLastPage(10);
+            threadList.addThread(t);
         }
 
         return threadList;
