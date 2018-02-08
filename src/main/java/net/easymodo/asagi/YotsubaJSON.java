@@ -32,7 +32,7 @@ public class YotsubaJSON extends YotsubaAbstract {
         boardInfo.put("link", "http://a.4cdn.org/" + boardName);
         boardInfo.put("html", "http://boards.4chan.org/" + boardName + "/");
         boardInfo.put("imageLink", "http://i.4cdn.org/" + boardName);
-        boardInfo.put("thumbLink", "http://1.t.4cdn.org/" + boardName);
+        boardInfo.put("thumbLink", "http://i.4cdn.org/" + boardName);
         return Collections.unmodifiableMap(boardInfo);
     }
 
@@ -202,7 +202,7 @@ public class YotsubaJSON extends YotsubaAbstract {
         p.setCapcode(capcode);
         p.setPosterHash(posterHash);
         p.setPosterCountry(posterCountry);
-        p.setExif(this.cleanSimple(this.parseMeta(pj.getCom())));
+        p.setExif(this.cleanSimple(this.parseMeta(pj.getCom(), pj.getUniqueIps(), pj.getSince4pass(), pj.getTrollCountry())));
 
         return p;
     }
