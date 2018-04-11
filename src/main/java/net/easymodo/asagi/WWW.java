@@ -183,7 +183,7 @@ public abstract class WWW extends Board {
             } else {
                 // Needed to consume the rest of the response and release the connection
                 EntityUtils.consumeQuietly(res.getEntity());
-                throw new HttpGetException(res.getStatusLine().getReasonPhrase(), statusCode);
+                throw new HttpGetException(res.getStatusLine().getReasonPhrase(), statusCode, link);
             }
         }
 
