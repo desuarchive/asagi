@@ -68,13 +68,8 @@ public abstract class WWW extends Board {
         HttpParams params = new BasicHttpParams();
         HttpConnectionParams.setSoTimeout(params, 5000);
         HttpConnectionParams.setConnectionTimeout(params, 5000);
-<<<<<<< HEAD
-        params.setParameter(ClientPNames.COOKIE_POLICY, CookiePolicy.IGNORE_COOKIES);
         params.setParameter(CoreProtocolPNames.USER_AGENT, "Asagi/0.4.0");
-=======
-        params.setParameter(CoreProtocolPNames.USER_AGENT, "Asagi/0.3.0");
         CookieHandler.setDefault(new CookieManager());
->>>>>>> ffa94aa4b06cd09682f81b1062609ffd0f4ae06a
 
         PoolingClientConnectionManager pccm = new PoolingClientConnectionManager();
         pccm.setDefaultMaxPerRoute(20);
